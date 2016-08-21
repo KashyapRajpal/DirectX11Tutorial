@@ -187,3 +187,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/GraphicsEngine.sln
+/GraphicsEngine.VC.db
+/GraphicsEngine.VC.VC.opendb

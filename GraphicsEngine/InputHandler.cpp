@@ -25,15 +25,24 @@ void InputHandler::Release()
 
 bool InputHandler::IsKeyDown(unsigned int key)
 {
+	if (key > 255)
+		return false;
+
 	return m_inputKeys[key];
 }
 
 void InputHandler::SetKeyDown(unsigned int key)
 {
+	if (key > 255)
+		return;
+
 	m_inputKeys[key] = true;
 }
 
 void InputHandler::SetKeyUp(unsigned int key)
 {
+	if (key > 255)
+		return;
+
 	m_inputKeys[key] = false;
 }

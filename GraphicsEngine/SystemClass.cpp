@@ -1,6 +1,6 @@
 #include "SystemClass.h"
 
-
+//#pragma optimize("", off)
 SystemClass::SystemClass()
 {
 	m_pGraphics = nullptr;
@@ -14,6 +14,7 @@ SystemClass::~SystemClass()
 
 bool SystemClass::Init()
 {
+	ApplicationHandle = this;
 	// Initialize width and height to zero.
 	int screenWidth = 0;
 	int screenHeight = 0;
@@ -237,23 +238,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 	switch (umessage)
 	{
 		// Check if the window is being destroyed.
-	case WM_DESTROY:
-	{
-		PostQuitMessage(0);
-		return 0;
-	}
+		case WM_DESTROY:
+		{
+			PostQuitMessage(0);
+			return 0;
+		}
 
-	// Check if the window is being closed.
-	case WM_CLOSE:
-	{
-		PostQuitMessage(0);
-		return 0;
-	}
+		// Check if the window is being closed.
+		case WM_CLOSE:
+		{
+			PostQuitMessage(0);
+			return 0;
+		}
 
-	// All other messages pass to the message handler in the system class.
-	default:
-	{
-		return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
-	}
+		// All other messages pass to the message handler in the system class.
+		default:
+		{
+			return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+		}
 	}
 }

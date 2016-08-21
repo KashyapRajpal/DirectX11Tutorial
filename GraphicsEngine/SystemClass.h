@@ -3,6 +3,7 @@
 // To speed up windows build process so that we do not build unnecessary files.
 #define WIN32_LEAN_AND_MEAN
 
+#include <Windows.h>
 #include "InputHandler.h"
 #include "GraphicsManager.h"
 
