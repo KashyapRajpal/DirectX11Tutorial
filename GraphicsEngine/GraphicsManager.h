@@ -1,9 +1,13 @@
 #pragma once
 // Includes
 #include "D3DManager.h"
+#include "ModelClass.h"
+#include "CameraClass.h"
+#include "ColorShaderClass.h"
+
 
 // Global Defines
-#define FULL_SCREEN 0
+#define FULL_SCREEN 1
 #define VSYNC_ENABLED 0
 #define SCREEN_DEPTH 1000.0f
 #define SCREEN_NEAR 0.1f
@@ -24,6 +28,9 @@ private:
 	bool RenderFrame();
 
 	// Member Variables
-	D3DManager* m_pD3DManager;
+	D3DManager*        m_pD3DManager;
+	CameraClass*       m_pCamera;
+	ModelClass*        m_pModel;
+	ColorShaderClass*  m_pColorShader;
 };
 
