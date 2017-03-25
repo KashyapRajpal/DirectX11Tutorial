@@ -1,9 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: colorshaderclass.h
-////////////////////////////////////////////////////////////////////////////////
-#ifndef _COLORSHADERCLASS_H_
-#define _COLORSHADERCLASS_H_
-
+#pragma once
 
 //////////////
 // INCLUDES //
@@ -14,11 +9,7 @@
 #include <fstream>
 using namespace std;
 
-
-////////////////////////////////////////////////////////////////////////////////
-// Class name: ColorShaderClass
-////////////////////////////////////////////////////////////////////////////////
-class ColorShaderClass
+class ColorShader
 {
 private:
 	struct MatrixBufferType
@@ -29,9 +20,9 @@ private:
 	};
 
 public:
-	ColorShaderClass();
-	ColorShaderClass(const ColorShaderClass&);
-	~ColorShaderClass();
+	ColorShader();
+	ColorShader(const ColorShader&);
+	~ColorShader();
 
 	bool Initialize(ID3D11Device*, HWND);
 	void Shutdown();
@@ -51,5 +42,3 @@ private:
 	ID3D11InputLayout* m_layout;
 	ID3D11Buffer* m_matrixBuffer;
 };
-
-#endif

@@ -1,16 +1,15 @@
 #pragma once
 // Includes
+#include "Defines.h"
 #include "D3DManager.h"
-#include "ModelClass.h"
-#include "CameraClass.h"
-#include "ColorShaderClass.h"
+#include "Model.h"
+#include "Camera.h"
 
-
-// Global Defines
-#define FULL_SCREEN 1
-#define VSYNC_ENABLED 0
-#define SCREEN_DEPTH 1000.0f
-#define SCREEN_NEAR 0.1f
+#ifdef USE_TEXTURES
+#include "TextureShaderClass.h"
+#else
+#include "ColorShader.h"
+#endif
 
 class GraphicsManager
 {
@@ -29,8 +28,13 @@ private:
 
 	// Member Variables
 	D3DManager*        m_pD3DManager;
-	CameraClass*       m_pCamera;
-	ModelClass*        m_pModel;
-	ColorShaderClass*  m_pColorShader;
+	Camera*			   m_pCamera;
+	Model*			   m_pModel;
+	
+#ifdef USE_TEXTURES
+	TextureShaderClass* m_pTextureShader;
+#else
+	ColorShader*  m_pColorShader;
+#endif
 };
 

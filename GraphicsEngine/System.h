@@ -7,11 +7,11 @@
 #include "InputHandler.h"
 #include "GraphicsManager.h"
 
-class SystemClass
+class System
 {
 public:
-	SystemClass();
-	~SystemClass();
+	System();
+	~System();
 
 	bool Init();
 	void Run();
@@ -21,7 +21,7 @@ public:
 
 private:
 	bool Frame();
-	void InitializeWindows(int&, int&);
+	void InitializeWindows(int& width, int& height);
 	void ShutdownWindows();
 
 	LPCWSTR m_pApplicationName;
@@ -41,4 +41,4 @@ static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 /////////////
 // GLOBALS //
 /////////////
-static SystemClass* ApplicationHandle = 0;
+static System* ApplicationHandle = 0;

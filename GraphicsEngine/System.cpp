@@ -1,18 +1,18 @@
-#include "SystemClass.h"
+#include "System.h"
 
 //#pragma optimize("", off)
-SystemClass::SystemClass()
+System::System()
 {
 	m_pGraphics = nullptr;
 	m_pInput = nullptr;
 }
 
 
-SystemClass::~SystemClass()
+System::~System()
 {
 }
 
-bool SystemClass::Init()
+bool System::Init()
 {
 	ApplicationHandle = this;
 	// Initialize width and height to zero.
@@ -45,7 +45,7 @@ bool SystemClass::Init()
 	return m_pGraphics->Init(screenWidth, screenHeight, m_pHwnd);
 }
 
-void SystemClass::Run()
+void System::Run()
 {
 	MSG windowsMessage;
 	
@@ -75,7 +75,7 @@ void SystemClass::Run()
 	}
 }
 
-void SystemClass::Release()
+void System::Release()
 {
 	// Release Graphics
 	if (m_pGraphics)
@@ -99,7 +99,7 @@ void SystemClass::Release()
 	ShutdownWindows();	
 }
 
-bool SystemClass::Frame()
+bool System::Frame()
 {
 	// Todo [krajpal]  : For now return false i.e. do not render frame
 	//					 when esc key is pressed. Create a menu to exit app.
@@ -115,7 +115,7 @@ bool SystemClass::Frame()
 }
 
 // TODO [krajpal] :  Refactor this fuction when we have a menu styled app window.
-LRESULT CALLBACK SystemClass::MessageHandler(HWND pWindowsHandle, UINT windowsMessage, WPARAM windowsParam, LPARAM lparam)
+LRESULT CALLBACK System::MessageHandler(HWND pWindowsHandle, UINT windowsMessage, WPARAM windowsParam, LPARAM lparam)
 {
 	switch (windowsMessage)
 	{
@@ -134,7 +134,7 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND pWindowsHandle, UINT windowsMe
 	}
 }
 
-void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
+void System::InitializeWindows(int& screenWidth, int& screenHeight)
 {
 	WNDCLASSEX wc;
 	DEVMODE dmScreenSettings;
@@ -209,7 +209,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 	ShowCursor(false);
 }
 
-void SystemClass::ShutdownWindows()
+void System::ShutdownWindows()
 {
 	// Show the mouse cursor.
 	ShowCursor(true);

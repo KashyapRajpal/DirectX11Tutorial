@@ -22,13 +22,13 @@
     <Filter Include="Source Files\Graphics">
       <UniqueIdentifier>{9b6879b8-d58b-4d59-88a0-adbfa7500daa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graphics\Shaders">
+      <UniqueIdentifier>{d0a26bad-c85c-46e7-b874-c7eef48ed06d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp">
       <Filter>Source Files\AppMain</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemClass.cpp">
-      <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files\System</Filter>
@@ -39,20 +39,26 @@
     <ClCompile Include="D3DManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ModelClass.cpp">
+    <ClCompile Include="ColorShader.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ColorShaderClass.cpp">
+    <ClCompile Include="Model.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="CameraClass.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureShaderClass.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SystemClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,22 +68,40 @@
     <ClInclude Include="D3DManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelClass.h">
+    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ColorShaderClass.h">
+    <ClInclude Include="ColorShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraClass.h">
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureShaderClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">
-      <Filter>Source Files\Graphics</Filter>
+      <Filter>Source Files\Graphics\Shaders</Filter>
     </None>
     <None Include="color.vs">
-      <Filter>Source Files\Graphics</Filter>
+      <Filter>Source Files\Graphics\Shaders</Filter>
+    </None>
+    <None Include="texture.ps">
+      <Filter>Source Files\Graphics\Shaders</Filter>
+    </None>
+    <None Include="texture.vs">
+      <Filter>Source Files\Graphics\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

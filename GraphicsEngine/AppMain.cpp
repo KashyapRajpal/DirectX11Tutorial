@@ -5,11 +5,11 @@
 #pragma once
 
 // Includes
-#include "SystemClass.h"
+#include "System.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
-	SystemClass* pSystem = new SystemClass();
+	System* pSystem = new System();
 
 	if (pSystem == nullptr)
 	{

@@ -1,33 +1,45 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: modelclass.cpp
-////////////////////////////////////////////////////////////////////////////////
-#include "ModelClass.h"
+#include "Model.h"
 
-
-ModelClass::ModelClass()
+Model::Model()
 {
 	m_pVertexBuffer = 0;
 	m_pIndexBuffer = 0;
+	m_pTexture = 0;
 }
 
 
-ModelClass::ModelClass(const ModelClass& other)
+Model::Model(const Model& other)
 {
 }
 
 
-ModelClass::~ModelClass()
+Model::~Model()
 {
 }
 
-
-bool ModelClass::Initialize(ID3D11Device* device)
+#ifdef USE_TEXTURES
+bool Model::Initialize(ID3D11Device * pDevice, WCHAR * pTextureFileName)
 {
 	bool result;
 
 
 	// Initialize the vertex and index buffers.
-	result = InitializeBuffers(device);
+	result = InitializeBuffers(pDevice);
+	if (!result)
+	{
+		return false;
+	}
+
+	return LoadTexture(pDevice, pTextureFileName);
+}
+#else
+bool Model::Initialize(ID3D11Device* pDevice)
+{
+	bool result;
+
+
+	// Initialize the vertex and index buffers.
+	result = InitializeBuffers(pDevice);
 	if(!result)
 	{
 		return false;
@@ -35,33 +47,34 @@ bool ModelClass::Initialize(ID3D11Device* device)
 
 	return true;
 }
+#endif
 
-
-void ModelClass::Shutdown()
+void Model::Shutdown()
 {
+#ifdef USE_TEXTURES
+	// Release the model texture.
+	ReleaseTexture();
+#endif
+
 	// Shutdown the vertex and index buffers.
 	ShutdownBuffers();
-
-	return;
 }
 
 
-void ModelClass::Render(ID3D11DeviceContext* deviceContext)
+void Model::Render(ID3D11DeviceContext* deviceContext)
 {
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
-
-	return;
 }
 
 
-int ModelClass::GetIndexCount()
+const int Model::GetIndexCount()
 {
 	return m_indexCount;
 }
 
 
-bool ModelClass::InitializeBuffers(ID3D11Device* device)
+bool Model::InitializeBuffers(ID3D11Device* pDevice)
 {
 	VertexType* vertices;
 	unsigned long* indices;
@@ -90,6 +103,20 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
+#ifdef USE_TEXTURES
+	// Load the vertex array with data.
+	vertices[0].position = D3DXVECTOR3(-1.0f, -1.0f, 0.0f);  // Bottom left.
+	vertices[0].texture = D3DXVECTOR2(0.0f, 1.0f);;
+
+	vertices[1].position = D3DXVECTOR3(-1.0f, 1.0f, 0.0f);  // Top Left.
+	vertices[1].texture = D3DXVECTOR2(0.0f, 0.5f);;
+
+	vertices[2].position = D3DXVECTOR3(1.0f, 1.0f, 0.0f);  // Top right.
+	vertices[2].texture = D3DXVECTOR2(0.5f, 0.0f);;
+
+	vertices[3].position = D3DXVECTOR3(1.0f, -1.0f, 0.0f);  // Bottom right.
+	vertices[3].texture = D3DXVECTOR2(1.0f, 1.0f);;
+#else
 	// Load the vertex array with data.
 	vertices[0].position = D3DXVECTOR3(-1.0f, -1.0f, 0.0f);  // Bottom left.
 	vertices[0].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -102,7 +129,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 
 	vertices[3].position = D3DXVECTOR3(1.0f, -1.0f, 0.0f);  // Bottom right.
 	vertices[3].color = D3DXVECTOR4(1.0f, 1.0f, 0.0f, 1.0f);
-
+#endif
 	// Load the index array with data.
 
 	// Triangle Strip
@@ -125,7 +152,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	vertexData.SysMemSlicePitch = 0;
 
 	// Now create the vertex buffer.
-    result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
+    result = pDevice->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
 	if(FAILED(result))
 	{
 		return false;
@@ -145,7 +172,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	indexData.SysMemSlicePitch = 0;
 
 	// Create the index buffer.
-	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
+	result = pDevice->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
 	if(FAILED(result))
 	{
 		return false;
@@ -162,7 +189,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 }
 
 
-void ModelClass::ShutdownBuffers()
+void Model::ShutdownBuffers()
 {
 	// Release the index buffer.
 	if(m_pIndexBuffer)
@@ -182,7 +209,7 @@ void ModelClass::ShutdownBuffers()
 }
 
 
-void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
+void Model::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride;
 	unsigned int offset;
@@ -203,3 +230,40 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 	return;
 }
+
+#ifdef USE_TEXTURES
+bool Model::LoadTexture(ID3D11Device * pDevice, WCHAR * pTextureFileName)
+{
+	bool result;
+
+
+	// Create the texture object.
+	m_pTexture = new Texture();
+	if (!m_pTexture)
+	{
+		return false;
+	}
+
+	// Initialize the texture object.
+	result = m_pTexture->Initialize(pDevice, pTextureFileName);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void Model::ReleaseTexture()
+{
+	// Release the texture object.
+	if (m_pTexture)
+	{
+		m_pTexture->Shutdown();
+		delete m_pTexture;
+		m_pTexture = 0;
+	}
+
+	return;
+}
+#endif

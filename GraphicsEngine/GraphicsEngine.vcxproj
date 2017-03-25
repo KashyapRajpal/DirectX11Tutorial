@@ -12,26 +12,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
-    <ClCompile Include="CameraClass.cpp" />
-    <ClCompile Include="ColorShaderClass.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColorShader.cpp" />
     <ClCompile Include="D3DManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="ModelClass.cpp" />
-    <ClCompile Include="SystemClass.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CameraClass.h" />
-    <ClInclude Include="ColorShaderClass.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="ColorShader.h" />
     <ClInclude Include="D3DManager.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="Defines.h" />
     <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="ModelClass.h" />
-    <ClInclude Include="SystemClass.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureShaderClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps" />
     <None Include="color.vs" />
+    <None Include="texture.ps" />
+    <None Include="texture.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53AD9E91-542F-4FB7-95B3-DF866D10C12A}</ProjectGuid>
@@ -78,6 +85,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -98,6 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
