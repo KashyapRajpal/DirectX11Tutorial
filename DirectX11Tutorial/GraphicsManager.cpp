@@ -57,7 +57,7 @@ bool GraphicsManager::Init(int screenWidth, int screenHeight, HWND pWindowHandle
 	// Initialize the model object.
 
 #ifdef USE_TEXTURES
-	bInitialize = m_pModel->Initialize(m_pD3DManager->GetDevice(), L"../GraphicsEngine/assets/beachstones.dds");
+	bInitialize = m_pModel->Initialize(m_pD3DManager->GetDevice(), L"../DirectX11Tutorial/assets/beachstones.dds");
 #else
 	bInitialize = m_pModel->Initialize(m_pD3DManager->GetDevice());
 #endif
